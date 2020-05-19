@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using KitapEvi.Library;
 
 namespace KitapEvi.Uygulamasi
 {
@@ -18,10 +19,10 @@ namespace KitapEvi.Uygulamasi
                     switch (ch)
                     {
                         case '1':
-                            Kitaplik.KitapEkleme();
+                            KitaplikLib.KitapEkleme();
                             break;
                         case '2':
-                            Kitaplik.KitaplariGoruntule();
+                            KitaplikLib.KitaplariGoruntule();
                             break;
                         default:
                             Console.WriteLine("Menüde sadece 2 seçenek bulunmaktadır , 1 veya 2 seçeneğini kullanınız.");
@@ -29,6 +30,7 @@ namespace KitapEvi.Uygulamasi
                     }
                     Console.WriteLine("---------------------------------------\nBaşka işlem yapmak istiyor musunuz ? (e-h)");
                     cevap = Console.ReadLine();
+                    Console.Clear();
                 } while (cevap == "e");
             }
             catch (Exception hata)

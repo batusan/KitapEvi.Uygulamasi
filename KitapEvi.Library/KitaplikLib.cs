@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
-namespace KitapEvi.Uygulamasi
+namespace KitapEvi.Library
 {
-    public class Kitaplik
+    public class KitaplikLib
     {
         private static string kitapadi;
         private static string yazar;
@@ -19,43 +17,61 @@ namespace KitapEvi.Uygulamasi
 
         private static int kitapsayi;//Kullanıcının eklemek istediği sayıyı tanımlıcağımız değişken.
         private static int tarih; // Basım tarihi tanımlanması sırasında ki aksaklıkları engellemek için kullanıldı.
+        private static string path = "D:/kitapkayitlari.txt";
 
 
-        public Kitaplik(string kitapadi, string yazar, DateTime basimtarihi, string tur)
+        public KitaplikLib(string kitapadi, string yazar, DateTime basimtarihi, string tur)//default constructer metod (varsayılan yapıcı metod)
         {
+            //Class içinde bulunan fieldlarımıza varsayılan değerlerini atama işlemi yapar
             Kitapadi = kitapadi;
             Yazar = yazar;
             Basimtarihi = basimtarihi;
             Tur = tur;
-        }        
-        
+        }
 
-        public static void KitabiYazdir(Kitaplik[] kitapdizisi,int i)
+
+        public static void KitabiYazdir(KitaplikLib[] kitapdizisi, int i)
         {
-            FileStream fs = new FileStream("D:/kitapkayitlari.txt", FileMode.Append, FileAccess.Write, FileShare.Write);
+            try
+            {
+            FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write, FileShare.Write);
             StreamWriter sw = new StreamWriter(fs);
-            sw.WriteLine(kitapdizisi[i].KitapDizisi());
+            sw.WriteLine(kitapdizisi[i].KitapDetay());
             fs.Flush();
             sw.Close();
             fs.Close();
+            }
+            catch (IOException e)
+            {
+                // Dosya konumunun bulunamadığı hatalarda dizini kontrol etme mesajını gönderir.
+                Console.WriteLine("Dosya dizini bulunamadı. Lütfen dizini kontrol ediniz :" + "\n" + path);
+            }
+            // text dosyası yoksa oluşturup KitapEkleme() methodu ile dizi elemanlarını kaydeden methodumuz.
+
         }
 
 
         public static void KitaplariGoruntule()
         {
-            string line;
-            StreamReader file = new StreamReader(@"D:/kitapkayitlari.txt");
-            while ((line = file.ReadLine()) != null)
-            {
+            string path = "D:/kitapkayitlari.txt";
+            try
+            {   //Stream reader ile text dosyasını açıyor.
+                StreamReader sr = new StreamReader(path);
+                //ReadToEnd() methoduyla txt dosyasının sonuna kadar satır satır okuyor ve yazdırıyor.
+                string line = sr.ReadToEnd();
                 Console.WriteLine(line);
             }
-            file.Close();
+            catch (IOException e)
+            {
+                // Dosya konumunun bulunamadığı hatalarda dizini kontrol etme mesajını gönderir.
+                Console.WriteLine("Dosya dizini bulunamadı. Lütfen dizini kontrol ediniz :" +"\n"+path);
+            }
         }
         public static void KitapEkleme()
         {
             Console.WriteLine("Kaç kitap eklemek istiyorsunuz ?");
             kitapsayi = Convert.ToInt16(Console.ReadLine());
-            Kitaplik[] kitapdizisi = new Kitaplik[kitapsayi];
+            KitaplikLib[] kitapdizisi = new KitaplikLib[kitapsayi];
 
             for (int i = 0; i < kitapsayi; i++)
             {
@@ -75,11 +91,14 @@ namespace KitapEvi.Uygulamasi
                 Basimtarihi = new DateTime(tarih, 1, 1);
                 Console.WriteLine("Kitap Tur Giriniz : ");
                 Tur = Console.ReadLine();
-                Kitaplik kitap = new Kitaplik(Kitapadi, Yazar, Basimtarihi, Tur);
+                KitaplikLib kitap = new KitaplikLib(Kitapadi, Yazar, Basimtarihi, Tur);
                 kitapdizisi[i] = kitap;
-                KitabiYazdir(kitapdizisi,i);
+                KitabiYazdir(kitapdizisi, i);
             }
         }
-        public string KitapDizisi() => $"Kitap Adı:{Kitapadi} | Yazar:{Yazar} | Basım Tarihi:{Basimtarihi.Year} | Tur:{Tur}";
+
+        //KitaplıkLib classından türeyen kitap nesnesinin özelliklerini yazdırmamızı sağlar.
+        public string KitapDetay() => $"Kitap Adı:{Kitapadi} | Yazar:{Yazar} | Basım Tarihi:{Basimtarihi.Year} | Tur:{Tur}";
+
     }
 }
