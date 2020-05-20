@@ -15,9 +15,10 @@ namespace KitapEvi.Uygulamasi
                 do
                 {
                     Console.WriteLine("Merhabalar Kitabevi Sistemine Hoşgeldiniz \nUygulamayı " + DateTime.Now + " tarihinde çalıştırdın.");
-
-                    Console.WriteLine("\n \n \n \n" + "-----------------------------------------\n" + "1.Kitapevine kitap eklemek \n2.Kitaplığı görüntülemek.\n3.Kitaplığı Temizlemek.");
-                    Console.WriteLine("\nİşlem Yapmak İçin Rakam Giriniz :");
+                    Console.WriteLine("\n \n \n \n" + 
+                        "-----------------------------------------\n" +
+                        "1.Kitapevine kitap eklemek \n2.Kitaplığı görüntülemek.\n3.Kitaplığı Temizlemek.\nİşlem Yapmak İçin Rakam Giriniz :" +
+                        "\n-----------------------------------------");
                     char ch = Convert.ToChar(Console.ReadLine());
                     switch (ch)
                     {
