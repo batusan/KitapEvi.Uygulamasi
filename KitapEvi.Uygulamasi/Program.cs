@@ -14,7 +14,7 @@ namespace KitapEvi.Uygulamasi
                 char cevap = 'a';
                 do
                 {
-                    Console.WriteLine("Merhabalar Kitabevi Sistemine Hoşgeldiniz \nUygulamayı " + DateTime.Now + " tarihinde çalıştırdın.");
+                    Console.WriteLine("Merhabalar Kitabevi Sistemine Hoşgeldiniz \nUygulamayı " + DateTime.Now + " tarihinde çalıştırdınız.\nKitap listesi şu dizinde bulunmaktadır : "+KitaplikLib.path);
                     Console.WriteLine("\n \n \n \n" + 
                         "-----------------------------------------\n" +
                         "1.Kitapevine kitap eklemek \n2.Kitaplığı görüntülemek.\n3.Kitaplığı Temizlemek.\nİşlem Yapmak İçin Rakam Giriniz :" +

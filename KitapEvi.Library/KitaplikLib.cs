@@ -19,7 +19,7 @@ namespace KitapEvi.Library
 
         private static int kitapsayi;//Kullanıcının eklemek istediği sayıyı tanımlıcağımız değişken.
         private static int tarih; // Basım tarihi tanımlanması sırasında ki aksaklıkları engellemek için kullanıldı.
-        private static string path = "D:/kitapkayitlari.txt";
+        public static string path = "D:/kitapkayitlari.txt";
 
 
         public KitaplikLib(string kitapadi, string yazar, DateTime basimtarihi, string tur)//default constructer metod (varsayılan yapıcı metod)
@@ -153,16 +153,16 @@ namespace KitapEvi.Library
         //KitaplıkLib classından türeyen kitap nesnesinin özelliklerini yazdırmamızı sağlar.
         public string KitapDetay() => $"{Kitapadi}|{Yazar}|{Basimtarihi.Year}|{Tur}";
 
-        //------------------------------------------------------------------------------------
+        //ConsoleTables adlı proje classından tablo yapmamızı sağlayan bir kütüphane eklendi daha düzgün görüntülenmesi için.
         public static void TabloÇiz(string[,] dizi)
         {
+            Console.Clear();
             int kitapsayi = KitapSayisiniHesapla();
             var table = new ConsoleTable("Kitap Adı", "Yazar", "Basım tarihi", "Tür");
             for (int i = 0; i < KitapSayisiniHesapla(); i++)
             {
                 table.AddRow(dizi[i, 0], dizi[i, 1], dizi[i, 2], dizi[i, 3]);
             }
-            Console.WriteLine("\nKitaplar:" + kitapsayi + "\n");
             table.Write();
         }
     }
