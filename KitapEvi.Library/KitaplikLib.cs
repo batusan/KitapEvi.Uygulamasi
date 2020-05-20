@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ConsoleTables;
+using System;
 using System.IO;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace KitapEvi.Library
 {
@@ -34,12 +36,12 @@ namespace KitapEvi.Library
         {
             try
             {
-            FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write, FileShare.Write);
-            StreamWriter sw = new StreamWriter(fs);
-            sw.WriteLine(kitapdizisi[i].KitapDetay());
-            fs.Flush();
-            sw.Close();
-            fs.Close();
+                FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write, FileShare.Write);
+                StreamWriter sw = new StreamWriter(fs);
+                sw.WriteLine(kitapdizisi[i].KitapDetay());
+                fs.Flush();
+                sw.Close();
+                fs.Close();
             }
             catch (IOException e)
             {
@@ -50,23 +52,74 @@ namespace KitapEvi.Library
 
         }
 
+        public static void TxtDosyasiniKaldirma()
+        {
+            Console.WriteLine("Kitap listesini temizlemek istediğinizden emin misiniz ? (evet - hayır)");
+            string txtcevap = Console.ReadLine();
+            if (txtcevap == "evet")
+            {
+                Console.Clear();
+                File.Delete(path);
+                Console.WriteLine("Kitaplık başarıyla kaldırıldı.");
+            }
+        }
+
+        public static int KitapSayisiniHesapla()
+        {
+            string line;
+            int sayac = 0;
+            StreamReader sr = new StreamReader(path);
+            while ((line = sr.ReadLine()) != null)
+            {
+                sayac++;
+            }
+            return sayac;
+        }
 
         public static void KitaplariGoruntule()
         {
-            string path = "D:/kitapkayitlari.txt";
             try
-            {   //Stream reader ile text dosyasını açıyor.
+            {
+                string line;
                 StreamReader sr = new StreamReader(path);
-                //ReadToEnd() methoduyla txt dosyasının sonuna kadar satır satır okuyor ve yazdırıyor.
-                string line = sr.ReadToEnd();
-                Console.WriteLine(line);
+                string[,] kitapdizi2 = new string[KitapSayisiniHesapla(), 4];
+
+                for (int i = 0; i < KitapSayisiniHesapla();)
+                {
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        for (int j = 0; j < 4;)
+                        {
+                            string[] kelimeler = line.Split('|');
+                            foreach (string kelime in kelimeler)
+                            {
+                                kitapdizi2[i, j] = kelime;
+                                j++;
+                            }
+                        }
+                        i++;
+                    }
+                }
+                /*for (int i = 0; i < KitapSayisiniHesapla(); i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        Console.WriteLine(kitapdizi2[i, j]);
+                        //kitapdizi2[i, j] = kelime;
+                    }
+                }*/
+                TabloÇiz(kitapdizi2);
+                Console.WriteLine(KitapSayisiniHesapla() + " kitap listelendi.");
+                sr.Close();
             }
             catch (IOException e)
             {
                 // Dosya konumunun bulunamadığı hatalarda dizini kontrol etme mesajını gönderir.
-                Console.WriteLine("Dosya dizini bulunamadı. Lütfen dizini kontrol ediniz :" +"\n"+path);
+                Console.WriteLine("Dosya dizini bulunamadı. Lütfen dizini kontrol ediniz :" + "\n" + path);
             }
+            // text dosyası yoksa oluşturup KitapEkleme() methodu ile dizi elemanlarını kaydeden methodumuz.
         }
+
         public static void KitapEkleme()
         {
             Console.WriteLine("Kaç kitap eklemek istiyorsunuz ?");
@@ -98,7 +151,19 @@ namespace KitapEvi.Library
         }
 
         //KitaplıkLib classından türeyen kitap nesnesinin özelliklerini yazdırmamızı sağlar.
-        public string KitapDetay() => $"Kitap Adı:{Kitapadi} | Yazar:{Yazar} | Basım Tarihi:{Basimtarihi.Year} | Tur:{Tur}";
+        public string KitapDetay() => $"{Kitapadi}|{Yazar}|{Basimtarihi.Year}|{Tur}";
 
+        //------------------------------------------------------------------------------------
+        public static void TabloÇiz(string[,] dizi)
+        {
+            int kitapsayi = KitapSayisiniHesapla();
+            var table = new ConsoleTable("Kitap Adı", "Yazar", "Basım tarihi", "Tür");
+            for (int i = 0; i < KitapSayisiniHesapla(); i++)
+            {
+                table.AddRow(dizi[i, 0], dizi[i, 1], dizi[i, 2], dizi[i, 3]);
+            }
+            Console.WriteLine("\nKitaplar:" + kitapsayi + "\n");
+            table.Write();
+        }
     }
 }

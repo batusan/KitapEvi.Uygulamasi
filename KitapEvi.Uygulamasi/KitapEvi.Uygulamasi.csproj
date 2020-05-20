@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ConsoleTables\ConsoleTables.csproj" />
     <ProjectReference Include="..\KitapEvi.Library\KitapEvi.Library.csproj" />
   </ItemGroup>
 
