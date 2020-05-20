@@ -49,7 +49,6 @@ namespace KitapEvi.Library
                 Console.WriteLine("Dosya dizini bulunamadı. Lütfen dizini kontrol ediniz :" + "\n" + path);
             }
             // text dosyası yoksa oluşturup KitapEkleme() methodu ile dizi elemanlarını kaydeden methodumuz.
-
         }
 
         public static void TxtDosyasiniKaldirma()
@@ -122,17 +121,17 @@ namespace KitapEvi.Library
 
         public static void KitapEkleme()
         {
-            Console.WriteLine("Kaç kitap eklemek istiyorsunuz ?");
+            Console.Write("Kaç kitap eklemek istiyorsunuz ? => ");
             kitapsayi = Convert.ToInt16(Console.ReadLine());
             KitaplikLib[] kitapdizisi = new KitaplikLib[kitapsayi];
 
             for (int i = 0; i < kitapsayi; i++)
             {
-                Console.WriteLine("Kitap Adını Giriniz : \n");
+                Console.Write("Kitap Adını Giriniz : => ");
                 Kitapadi = Console.ReadLine();
-                Console.WriteLine("Kitap Yazarını Giriniz : \n");
+                Console.Write("Kitap Yazarını Giriniz : => ");
                 Yazar = Console.ReadLine();
-                Console.WriteLine("Kitap Basım Yılını Giriniz : \n");
+                Console.Write("Kitap Basım Yılını Giriniz : => ");
                 do
                 {
                     tarih = int.Parse(Console.ReadLine());
@@ -142,7 +141,7 @@ namespace KitapEvi.Library
                     }
                 } while (tarih > 2020);
                 Basimtarihi = new DateTime(tarih, 1, 1);
-                Console.WriteLine("Kitap Tur Giriniz : ");
+                Console.Write("Kitap Türü Giriniz : => ");
                 Tur = Console.ReadLine();
                 KitaplikLib kitap = new KitaplikLib(Kitapadi, Yazar, Basimtarihi, Tur);
                 kitapdizisi[i] = kitap;

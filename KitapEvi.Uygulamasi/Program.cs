@@ -8,44 +8,14 @@ namespace KitapEvi.Uygulamasi
     {
         static void Main(string[] args)
         {
-
+            char cevap = 'e';
             try
-            {
-                char cevap = 'a';
+            {           
                 do
                 {
-                    Console.WriteLine("Merhabalar Kitabevi Sistemine Hoşgeldiniz \nUygulamayı " + DateTime.Now + " tarihinde çalıştırdınız.\nKitap listesi şu dizinde bulunmaktadır : "+KitaplikLib.path);
-                    Console.WriteLine("\n \n \n \n" + 
-                        "-----------------------------------------\n" +
-                        "1.Kitapevine kitap eklemek \n2.Kitaplığı görüntülemek.\n3.Kitaplığı Temizlemek.\nİşlem Yapmak İçin Rakam Giriniz :" +
-                        "\n-----------------------------------------");
-                    char ch = Convert.ToChar(Console.ReadLine());
-                    switch (ch)
-                    {
-                        case '1':
-                            KitaplikLib.KitapEkleme();
-                            break;
-                        case '2':
-                            KitaplikLib.KitaplariGoruntule();
-                            break;
-                        case '3':
-                            KitaplikLib.TxtDosyasiniKaldirma();
-                            break;
-                        default:
-                            Console.WriteLine("Menüde sadece 2 seçenek bulunmaktadır , 1 veya 2 seçeneğini kullanınız.");
-                            break;
-                    }
-                    Console.WriteLine("---------------------------------------\nBaşka işlem yapmak istiyor musunuz ? (e-h)");
-                    try
-                    {
-                        cevap = Convert.ToChar(Console.ReadLine());
-                        Console.Clear();
-                    }
-                    catch (Exception hata)
-                    {
-                        Console.WriteLine("");
-                    }
-
+                    Console.Clear();
+                    Menu.BaslangicMenusu();
+                    cevap = Menu.TekrarMenusu();
                 } while (cevap == 'e');
             }
             catch (Exception hata)
