@@ -31,11 +31,11 @@ namespace KitapEvi.Library
             Tur = tur;
         }
 
-
         public static void KitabiYazdir(KitaplikLib[] kitapdizisi, int i)
         {
             try
             {
+                string line;
                 FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write, FileShare.Write);
                 StreamWriter sw = new StreamWriter(fs);
                 sw.WriteLine(kitapdizisi[i].KitapDetay());
@@ -43,7 +43,7 @@ namespace KitapEvi.Library
                 sw.Close();
                 fs.Close();
             }
-            catch (IOException e)
+            catch (Exception e)
             {
                 // Dosya konumunun bulunamadığı hatalarda dizini kontrol etme mesajını gönderir.
                 Console.WriteLine("Dosya dizini bulunamadı. Lütfen dizini kontrol ediniz :" + "\n" + path);
@@ -94,9 +94,10 @@ namespace KitapEvi.Library
                         Console.WriteLine(kitapdizi2[i, j]);
                         //kitapdizi2[i, j] = kelime;
                     }
-                }*/               
-                TabloÇiz(goruntulemedizisi);
-                Console.WriteLine(KitapSayisiniHesapla() + " kitap listelendi.");
+                }*/
+                Tablo.Cizdir(goruntulemedizisi,KitapSayisiniHesapla()," Kitap Adı"," Yazar"," Basım Tarihi"," Tür");
+                //TabloÇiz(goruntulemedizisi);
+                Console.WriteLine(KitapSayisiniHesapla() - 1 + " kitap listelendi.");
                 sr.Close();
             }
             catch (IOException e)
@@ -139,18 +140,5 @@ namespace KitapEvi.Library
 
         //KitaplıkLib classından türeyen kitap nesnesinin özelliklerini yazdırmamızı sağlar.
         public string KitapDetay() => $"{Kitapadi}|{Yazar}|{Basimtarihi.Year}|{Tur}";
-
-        //ConsoleTables adlı proje classından tablo yapmamızı sağlayan bir kütüphane eklendi daha düzgün görüntülenmesi için.
-        public static void TabloÇiz(string[,] dizi)
-        {
-            Console.Clear();
-            Console.WriteLine("-----------------------------Kitap Listesi------------------------------");
-            var table = new ConsoleTable("Kitap Adı", "Yazar", "Basım tarihi", "Tür");
-            for (int i = 0; i < KitapSayisiniHesapla(); i++)
-            {
-                table.AddRow(dizi[i, 0], dizi[i, 1], dizi[i, 2], dizi[i, 3]);
-            }
-            table.Write();
-        }
     }
 }

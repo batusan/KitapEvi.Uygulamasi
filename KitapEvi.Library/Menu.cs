@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
@@ -16,7 +17,7 @@ namespace KitapEvi.Library
                 try
                 {
                     hatadurumu = 0;
-                    Console.WriteLine("Merhabalar Kitabevi Sistemine Hoşgeldiniz \nUygulamayı " + DateTime.Now + " tarihinde çalıştırdınız.\nKitap listesi şu dizinde bulunmaktadır : " + KitaplikLib.path);
+                    Console.WriteLine("Merhabalar Kitabevi Sistemine Hoşgeldiniz \nUygulamayı " + DateTime.Now + " tarihinde çalıştırdınız.\nKitap listesi şu dizinde bulunmaktadır : \n"+ DosyaKontrol());
                     Console.Write("\n \n \n \n" +
                     "-----------------------------------------\n" +
                     "1.Kitapevine kitap eklemek \n2.Kitaplığı görüntülemek.\nİşlem Yapmak İçin Rakam Giriniz : => ");
@@ -96,6 +97,24 @@ namespace KitapEvi.Library
 
             return cevap;
 
+        }
+        public static string DosyaKontrol()
+        {
+            string kontrol = "";
+            if (File.Exists(KitaplikLib.path))
+            {
+                kontrol = "Dosya " + KitaplikLib.path + " dizininde bulunmaktadır.";
+            }else {
+                
+                FileStream fs = new FileStream(KitaplikLib.path, FileMode.Append, FileAccess.Write, FileShare.Write);
+                StreamWriter sw = new StreamWriter(fs);
+                kontrol = "Dosya dizininde bulunmamaktadır. Dosya oluşturuluyor...\nDosyanız oluşturuldu. "+KitaplikLib.path;
+                sw.WriteLine("Kitap Adı|Yazarı|Basım Tarihi|Türü");
+                fs.Flush();
+                sw.Close();
+                fs.Close();
+            }
+            return kontrol;
         }
     }
 }
