@@ -145,7 +145,6 @@ namespace KitapEvi.Library
         {
             Console.Clear();
             Console.WriteLine("-----------------------------Kitap Listesi------------------------------");
-            int kitapsayi = KitapSayisiniHesapla();
             var table = new ConsoleTable("Kitap Adı", "Yazar", "Basım tarihi", "Tür");
             for (int i = 0; i < KitapSayisiniHesapla(); i++)
             {
