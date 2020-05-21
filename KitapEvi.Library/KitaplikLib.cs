@@ -123,11 +123,11 @@ namespace KitapEvi.Library
                 do
                 {
                     tarih = int.Parse(Console.ReadLine());
-                    if (tarih > 2020)
+                    if (tarih > 2020 || tarih < 1700)
                     {
-                        Console.Write("Basım Yılını 2020'den Küçük Girmelisiniz.Tekrar Giriniz : => ");
+                        Console.Write("Basım Yılını 2020'den Küçük veya 1700'den büyük girmelisiniz.Tekrar Giriniz : => ");
                     }
-                } while (tarih > 2020);
+                } while (tarih > 2020 || tarih < 1700);
                 Basimtarihi = new DateTime(tarih, 1, 1);
                 Console.Write("Kitap Türü Giriniz : => ");
                 Tur = Console.ReadLine();
