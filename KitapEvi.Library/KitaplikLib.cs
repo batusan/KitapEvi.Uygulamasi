@@ -20,6 +20,7 @@ namespace KitapEvi.Library
         private static int tarih; // Basım tarihi tanımlanması sırasında ki aksaklıkları engellemek için kullanıldı.
         public static string path = "D:/kitapkayitlari.txt";
 
+        public KitaplikLib() { }//Constructor
 
         public KitaplikLib(string kitapadi, string yazar, DateTime basimtarihi, string tur)//default constructer metod (varsayılan yapıcı metod)
         {
