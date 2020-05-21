@@ -125,7 +125,7 @@ namespace KitapEvi.Library
                     tarih = int.Parse(Console.ReadLine());
                     if (tarih > 2020)
                     {
-                        Console.WriteLine("Basım Yılını 2020'den Küçük Girmelisiniz.\n Tekrar Giriniz : ");
+                        Console.Write("Basım Yılını 2020'den Küçük Girmelisiniz.Tekrar Giriniz : => ");
                     }
                 } while (tarih > 2020);
                 Basimtarihi = new DateTime(tarih, 1, 1);
