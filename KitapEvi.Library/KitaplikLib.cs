@@ -69,7 +69,7 @@ namespace KitapEvi.Library
             {
                 string line;
                 StreamReader sr = new StreamReader(path);
-                string[,] kitapdizi2 = new string[KitapSayisiniHesapla(), 4];
+                string[,] goruntulemedizisi = new string[KitapSayisiniHesapla(), 4];
 
                 for (int i = 0; i < KitapSayisiniHesapla();)
                 {
@@ -80,7 +80,7 @@ namespace KitapEvi.Library
                             string[] kelimeler = line.Split('|');
                             foreach (string kelime in kelimeler)
                             {
-                                kitapdizi2[i, j] = kelime;
+                                goruntulemedizisi[i, j] = kelime;
                                 j++;
                             }
                         }
@@ -95,7 +95,7 @@ namespace KitapEvi.Library
                         //kitapdizi2[i, j] = kelime;
                     }
                 }*/               
-                TabloÇiz(kitapdizi2);
+                TabloÇiz(goruntulemedizisi);
                 Console.WriteLine(KitapSayisiniHesapla() + " kitap listelendi.");
                 sr.Close();
             }
