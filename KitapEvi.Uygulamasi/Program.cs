@@ -9,19 +9,12 @@ namespace KitapEvi.Uygulamasi
         static void Main(string[] args)
         {
             char cevap = 'e';
-            try
-            {           
-                do
-                {
-                    Console.Clear();
-                    Menu.BaslangicMenusu();
-                    cevap = Menu.TekrarMenusu();
-                } while (cevap == 'e');
-            }
-            catch (Exception hata)
+            do
             {
-                Console.WriteLine("Lütfen örnekte ki gibi bir kullanım gerçekleştiriniz.'1' - '2'");
-            }
+                Console.Clear();
+                Menu.BaslangicMenusu();
+                cevap = Menu.TekrarMenusu();
+            } while (cevap == 'e');
         }
     }
 }

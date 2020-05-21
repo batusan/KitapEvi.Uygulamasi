@@ -19,7 +19,7 @@ namespace KitapEvi.Library
                     Console.WriteLine("Merhabalar Kitabevi Sistemine Hoşgeldiniz \nUygulamayı " + DateTime.Now + " tarihinde çalıştırdınız.\nKitap listesi şu dizinde bulunmaktadır : " + KitaplikLib.path);
                     Console.Write("\n \n \n \n" +
                     "-----------------------------------------\n" +
-                    "1.Kitapevine kitap eklemek \n2.Kitaplığı görüntülemek.\n3.Kitaplığı Temizlemek.\nİşlem Yapmak İçin Rakam Giriniz : => ");
+                    "1.Kitapevine kitap eklemek \n2.Kitaplığı görüntülemek.\nİşlem Yapmak İçin Rakam Giriniz : => ");
                     ch = Convert.ToChar(Console.ReadLine());
                     Console.WriteLine("-----------------------------------------");
                     switch (ch)
@@ -32,13 +32,9 @@ namespace KitapEvi.Library
                             KitaplikLib.KitaplariGoruntule();
                             hatadurumu = 0;
                             break;
-                        case '3':
-                            KitaplikLib.TxtDosyasiniKaldirma();
-                            hatadurumu = 0;
-                            break;
                         default:
                             Console.Clear();
-                            Console.WriteLine("HATA :Menüde sadece 3 seçenek bulunmaktadır , 1,2 veya 3 seçeneğini kullanınız.\n");
+                            Console.WriteLine("HATA :Menüde sadece 2 seçenek bulunmaktadır , 1 veya 2 seçeneğini kullanınız.\n");
                             hatadurumu = 1;
                             break;
                     }
@@ -51,6 +47,7 @@ namespace KitapEvi.Library
                 }
                 catch (Exception hata)
                 {
+                    Console.Clear();
                     Console.WriteLine("HATA : Lütfen örnekte ki gibi bir kullanım gerçekleştiriniz.'1' - '2'");
                     hatadurumu = 1;
                 }
@@ -63,10 +60,11 @@ namespace KitapEvi.Library
             int hatadurumu = 0;
             do
             {
-                Console.WriteLine("---------------------------------------\nSistem : Başka işlem yapmak istiyor musunuz ? (e-h)");
-                cevap = Convert.ToChar(Console.ReadLine());
+
                 try
                 {
+                    Console.WriteLine("---------------------------------------\nSistem : Başka işlem yapmak istiyor musunuz ? (e-h)");
+                    cevap = Convert.ToChar(Console.ReadLine());
                     switch (cevap)
                     {
                         case 'e':

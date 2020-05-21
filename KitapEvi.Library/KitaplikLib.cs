@@ -51,18 +51,6 @@ namespace KitapEvi.Library
             // text dosyası yoksa oluşturup KitapEkleme() methodu ile dizi elemanlarını kaydeden methodumuz.
         }
 
-        public static void TxtDosyasiniKaldirma()
-        {
-            Console.WriteLine("Kitap listesini temizlemek istediğinizden emin misiniz ? (evet - hayır)");
-            string txtcevap = Console.ReadLine();
-            if (txtcevap == "evet")
-            {
-                Console.Clear();
-                File.Delete(path);
-                Console.WriteLine("Kitaplık başarıyla kaldırıldı.");
-            }
-        }
-
         public static int KitapSayisiniHesapla()
         {
             string line;
@@ -106,7 +94,7 @@ namespace KitapEvi.Library
                         Console.WriteLine(kitapdizi2[i, j]);
                         //kitapdizi2[i, j] = kelime;
                     }
-                }*/
+                }*/               
                 TabloÇiz(kitapdizi2);
                 Console.WriteLine(KitapSayisiniHesapla() + " kitap listelendi.");
                 sr.Close();
@@ -156,6 +144,7 @@ namespace KitapEvi.Library
         public static void TabloÇiz(string[,] dizi)
         {
             Console.Clear();
+            Console.WriteLine("-----------------------------Kitap Listesi------------------------------");
             int kitapsayi = KitapSayisiniHesapla();
             var table = new ConsoleTable("Kitap Adı", "Yazar", "Basım tarihi", "Tür");
             for (int i = 0; i < KitapSayisiniHesapla(); i++)
