@@ -1,5 +1,4 @@
-﻿using ConsoleTables;
-using System;
+﻿using System;
 using System.IO;
 
 namespace KitapEvi.Library
@@ -19,6 +18,7 @@ namespace KitapEvi.Library
         private static int kitapsayi;//Kullanıcının eklemek istediği sayıyı tanımlıcağımız değişken.
         private static int tarih; // Basım tarihi tanımlanması sırasında ki aksaklıkları engellemek için kullanıldı.
         public static string path = "D:/kitapkayitlari.txt";
+        public static string kontrol = "";
 
         public KitaplikLib() { }//Constructor
 
@@ -31,22 +31,38 @@ namespace KitapEvi.Library
             Tur = tur;
         }
 
-        public static void KitabiYazdir(KitaplikLib[] kitapdizisi, int i)
+        public static void DosyaKontrol()
+        {
+            if (File.Exists(path))
+            {
+                kontrol = "Dosya doğrulandı. Konumu : " + path;
+            }
+            else
+            {
+                kontrol = "Dosya doğrulanamadı.\nLütfen manuel olarak dosya eklemeyin program oluşturucaktır.\n" + path;
+            }
+        }
+
+        public static void KitabiYazdir(KitaplikLib[] dizi, int i)
         {
             try
             {
-                string line;
-                FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write, FileShare.Write);
+                FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
                 StreamWriter sw = new StreamWriter(fs);
-                sw.WriteLine(kitapdizisi[i].KitapDetay());
+                sw.WriteLine(dizi[i].KitapDetay());
+                if (!(File.Exists(path)))
+                {
+                    sw.WriteLine("Kitap Adı|Yazarı|Basım Tarihi|Türü");
+                }
                 fs.Flush();
                 sw.Close();
                 fs.Close();
             }
-            catch (Exception e)
+            catch (IOException e)
             {
-                // Dosya konumunun bulunamadığı hatalarda dizini kontrol etme mesajını gönderir.
-                Console.WriteLine("Dosya dizini bulunamadı. Lütfen dizini kontrol ediniz :" + "\n" + path);
+                /*Dosya yazdırma işleminin hızlı ve for döngüsüyle olması durumundan dolayı 
+                işlem hala devam ederken yazdıramadığı için hatayla karşılaşıyoruz.*/
+                Console.WriteLine("Kitap ekleme işleminde hatayla karşılaşıldı , lütfen daha yavaş giriniz.");
             }
             // text dosyası yoksa oluşturup KitapEkleme() methodu ile dizi elemanlarını kaydeden methodumuz.
         }
@@ -95,7 +111,7 @@ namespace KitapEvi.Library
                         //kitapdizi2[i, j] = kelime;
                     }
                 }*/
-                Tablo.Cizdir(goruntulemedizisi,KitapSayisiniHesapla()," Kitap Adı"," Yazar"," Basım Tarihi"," Tür");
+                Tablo.Cizdir(goruntulemedizisi, KitapSayisiniHesapla(), " Kitap Adı", " Yazar", " Basım Tarihi", " Tür");
                 //TabloÇiz(goruntulemedizisi);
                 Console.WriteLine(KitapSayisiniHesapla() - 1 + " kitap listelendi.");
                 sr.Close();
