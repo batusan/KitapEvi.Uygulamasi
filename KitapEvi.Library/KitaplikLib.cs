@@ -31,15 +31,28 @@ namespace KitapEvi.Library
             Tur = tur;
         }
 
-        public static void DosyaKontrol()
+        public static void FileCheck()
         {
-            if (File.Exists(path))
+            try
             {
-                kontrol = "Dosya doğrulandı. Konumu : " + path;
+                if (File.Exists(path))
+                {
+                    kontrol = "Dosya doğrulandı. Konumu : " + path;
+                }
+                else
+                {
+                    kontrol = "Dosya doğrulanamadı.\nLütfen dosya eklemeyin program oluşturucaktır.\n" + path;
+                    FileStream xfs = new FileStream(path, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
+                    StreamWriter xsw = new StreamWriter(xfs);
+                    xsw.WriteLine("Kitap Adı|Yazarı|Basım Tarihi|Türü");
+                    xsw.Flush();
+                    xsw.Close();
+                    xsw.Dispose();
+                }
             }
-            else
+            catch (IOException e)
             {
-                kontrol = "Dosya doğrulanamadı.\nLütfen manuel olarak dosya eklemeyin program oluşturucaktır.\n" + path;
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -47,22 +60,20 @@ namespace KitapEvi.Library
         {
             try
             {
-                FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
+                FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write, FileShare.Read);
                 StreamWriter sw = new StreamWriter(fs);
+                sw.Flush();
                 sw.WriteLine(dizi[i].KitapDetay());
-                if (!(File.Exists(path)))
-                {
-                    sw.WriteLine("Kitap Adı|Yazarı|Basım Tarihi|Türü");
-                }
                 fs.Flush();
                 sw.Close();
                 fs.Close();
+                sw.Dispose();
             }
             catch (IOException e)
             {
                 /*Dosya yazdırma işleminin hızlı ve for döngüsüyle olması durumundan dolayı 
                 işlem hala devam ederken yazdıramadığı için hatayla karşılaşıyoruz.*/
-                Console.WriteLine("Kitap ekleme işleminde hatayla karşılaşıldı , lütfen daha yavaş giriniz.");
+                Console.WriteLine("Kitap ekleme işleminde hatayla karşılaşıldı , lütfen daha yavaş giriniz." + e.Message);
             }
             // text dosyası yoksa oluşturup KitapEkleme() methodu ile dizi elemanlarını kaydeden methodumuz.
         }
@@ -76,7 +87,10 @@ namespace KitapEvi.Library
             {
                 sayac++;
             }
+            sr.Close();
+            sr.Dispose();
             return sayac;
+
         }
 
         public static void KitaplariGoruntule()
@@ -103,6 +117,8 @@ namespace KitapEvi.Library
                         i++;
                     }
                 }
+                sr.Close();
+                sr.Dispose();
                 /*for (int i = 0; i < KitapSayisiniHesapla(); i++)
                 {
                     for (int j = 0; j < 4; j++)
@@ -114,7 +130,7 @@ namespace KitapEvi.Library
                 Tablo.Cizdir(goruntulemedizisi, KitapSayisiniHesapla(), " Kitap Adı", " Yazar", " Basım Tarihi", " Tür");
                 //TabloÇiz(goruntulemedizisi);
                 Console.WriteLine(KitapSayisiniHesapla() - 1 + " kitap listelendi.");
-                sr.Close();
+
             }
             catch (IOException e)
             {

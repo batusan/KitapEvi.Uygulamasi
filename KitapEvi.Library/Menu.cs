@@ -16,6 +16,7 @@ namespace KitapEvi.Library
             {
                 try
                 {
+
                     hatadurumu = 0;
                     Console.WriteLine("Merhabalar Kitabevi Sistemine Hoşgeldiniz \nUygulamayı " + DateTime.Now + " tarihinde çalıştırdınız.\nKitap listesi şu dizinde bulunmaktadır : \n"+KitaplikLib.kontrol);
                     Console.Write("\n \n \n \n" +
@@ -98,6 +99,7 @@ namespace KitapEvi.Library
             return cevap;
 
         }
+
 
     }
 }
