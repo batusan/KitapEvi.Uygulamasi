@@ -12,7 +12,7 @@ namespace KitapEvi.Uygulamasi
             do
             {
                 Console.Clear();
-                KitaplikLib.FileCheck();
+                KitaplikLib.DosyaKontrol();
                 Menu.BaslangicMenusu();
                 cevap = Menu.TekrarMenusu();
             } while (cevap == 'e');

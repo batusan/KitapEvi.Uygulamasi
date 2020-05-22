@@ -31,7 +31,7 @@ namespace KitapEvi.Library
             Tur = tur;
         }
 
-        public static void FileCheck()
+        public static void DosyaKontrol()
         {
             try
             {
