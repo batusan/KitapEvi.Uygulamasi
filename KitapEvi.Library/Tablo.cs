@@ -50,6 +50,7 @@ namespace KitapEvi.Library
 
         public static void Cizdir(string[,] dizi, int satirsayi, string para1, string para2, string para3, string para4)
         {
+            // Tabloyu hatlarını çizen ve yerleştirmeyi yapan metodumuz.
             SatirlariHesapla(dizi, satirsayi);
             Console.Clear();
             int satir = maks0 + maks1 + maks2 + maks3+8;
