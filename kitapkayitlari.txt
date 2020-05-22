@@ -1,0 +1,15 @@
+Kitap Adı|Yazarı|Basım Tarihi|Türü
+sdhsdh|shdsdh|2014|hdshsd
+sdhsdh|hdsahsad|2016|hsdhsd
+hsdahsad|hdsahsda|2017|hdsahsda
+sdahdhsa|hasd|2019|dhsdsah
+dhshds|shdhsd|2016|dshhds
+hasddhsahsda|hsdhsdahdsa|2018|hsdahsda
+basdhshdahsdhsda|basdsda|2019|hsdahdsa
+HASDHSADDHSA|sdhahadshdsa|2011|dshsdh
+ahdssdahhad|shdahasd|2017|ashdhdsadhsa
+sahdhsdahdsa|hsadhsa|2018|hasdhsdahasd
+hsdshd|hsdsdh|2015|dhsdhs
+hsdadhsa|shdahsda|2017|hasddhsa
+hsdasdha|hsdahsda|2018|shsdhds
+shdadhsa|shdashda|2014|shddhshds
